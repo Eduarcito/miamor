@@ -12,7 +12,7 @@ const imageList = [
   'foto7.jpg',
   'foto8.jpg',
   'foto9.jpg',
-  'foto10.jpg',  // Agrega más nombres aquí
+  'foto10.jpg',  
 ];
 
 const PhotoGallery = () => {
