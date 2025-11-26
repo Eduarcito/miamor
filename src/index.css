@@ -11,18 +11,5 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-@media (max-width: 600px) {
-  .gallery img {
-    width: 80px;
-  }
 
-  .flower {
-    width: 30px;
-    height: 30px;
-  }
-
-  button {
-    font-size: 16px;
-    padding: 8px 16px;
-  }
-}
+/* Global styles are now handled in App.css and component specific CSS */
