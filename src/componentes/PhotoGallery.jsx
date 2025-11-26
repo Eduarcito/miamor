@@ -23,6 +23,17 @@ const imageList = [
   'foto18.jpg',
   'foto19.jpg',
   'foto20.jpg',
+  'foto21.jpeg',
+  'foto22.jpeg',
+  'foto23.jpeg',
+  'foto24.jpeg',
+  'foto25.jpeg',
+  'foto26.jpeg',
+  'foto27.jpeg',
+  'foto28.jpeg',
+  'foto29.jpeg',
+  'foto30.jpeg',
+  'foto31.jpeg',
 ];
 
 const PhotoGallery = () => {

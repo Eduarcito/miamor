@@ -8,7 +8,7 @@ function App() {
     <div className="App">
       <backgroundmusic />
       <header>
-        <h1>🌸 Nuestro Jardín de Recuerdos 🌸</h1>
+        <h1>🌸 Nuestra historia de amor 🌸</h1>
       </header>
       <PhotoGallery />
       <SpringFlowers />
