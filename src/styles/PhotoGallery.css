@@ -1,3 +1,7 @@
+/* =========================
+   PhotoGallery CSS - iCloud Style
+   ========================= */
+
 .gallery-section {
   text-align: center;
   padding: 2rem 1rem;
@@ -11,24 +15,24 @@
   font-size: 2rem;
 }
 
+/* Masonry grid usando CSS columns */
 .gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 1rem;
-  padding: 1rem;
+  column-count: 4;      /* número de columnas */
+  column-gap: 1rem;     /* espacio entre columnas */
+  padding: 0;
 }
 
 .gallery img {
   width: 100%;
-  height: 200px;
-  /* Fixed height for uniformity */
-  object-fit: cover;
+  height: auto;          /* altura dinámica según la imagen */
+  margin-bottom: 1rem;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  opacity: 0;
-  animation: fadeIn 0.8s ease forwards;
   cursor: pointer;
-  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeIn 0.8s ease forwards;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .gallery img:hover {
@@ -37,12 +41,8 @@
   z-index: 1;
 }
 
+/* Fade-in animation */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
   to {
     opacity: 1;
     transform: translateY(0);
@@ -102,21 +102,29 @@
     transform: scale(0.9);
     opacity: 0;
   }
-
   to {
     transform: scale(1);
     opacity: 1;
   }
 }
 
+/* =========================
+   Responsive
+   ========================= */
+@media (max-width: 1200px) {
+  .gallery {
+    column-count: 3;
+  }
+}
+
+@media (max-width: 900px) {
+  .gallery {
+    column-count: 2;
+  }
+}
+
 @media (max-width: 600px) {
   .gallery {
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 0.5rem;
-    padding: 0.5rem;
-  }
-
-  .gallery img {
-    height: 150px;
+    column-count: 1;
   }
 }

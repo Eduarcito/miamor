@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import PhotoGallery from './componentes/PhotoGallery';
-import SpringFlowers from './componentes/SpringFlowers';
 
 function App() {
   return (
