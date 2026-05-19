@@ -6,9 +6,7 @@ function App() {
   return (
     <div className="App">
       <backgroundmusic />
-      <header>
-        <h1>Admirando a esta preciosota ❤️‍🩹</h1>
-      </header>
+
       <PhotoGallery />
     </div>
   );

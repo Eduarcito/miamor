@@ -7,7 +7,8 @@ const ImageModal = ({ src, alt, onClose }) => {
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <button className="close-button" onClick={onClose}>✿ Cerrar</button>
+        <button className="close-button" onClick={onClose}> cerrar x</button>
+        <p> ❤️‍🩹 Elizabeth El amor de mi vida ❤️‍🩹</p>
         <img src={src} alt={alt} />
       </div>
     </div>
