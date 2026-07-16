@@ -126,7 +126,8 @@ a {
 }
 
 .primary-action,
-.secondary-action {
+.secondary-action,
+.ghost-action {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -153,10 +154,70 @@ a {
   backdrop-filter: blur(12px);
 }
 
+.ghost-action {
+  border: 1px solid rgba(225, 29, 112, 0.2);
+  background: rgba(255, 228, 239, 0.62);
+  color: var(--rose-500);
+}
+
 .primary-action:hover,
-.secondary-action:hover {
+.secondary-action:hover,
+.ghost-action:hover {
   transform: translateY(-2px);
   box-shadow: 0 18px 44px rgba(122, 23, 69, 0.16);
+}
+
+.celebration-burst {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.celebration-burst span {
+  position: absolute;
+  left: var(--x);
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  background: var(--rose-500);
+  opacity: 0;
+  transform: rotate(45deg);
+  animation: burstHeart 1600ms ease-out forwards;
+  animation-delay: var(--delay);
+}
+
+.celebration-burst span::before,
+.celebration-burst span::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: inherit;
+}
+
+.celebration-burst span::before {
+  left: -7px;
+}
+
+.celebration-burst span::after {
+  top: -7px;
+}
+
+@keyframes burstHeart {
+  0% {
+    opacity: 0;
+    transform: translateY(20vh) rotate(45deg) scale(0.5);
+  }
+  12% {
+    opacity: 0.95;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--drift), calc(var(--rise) * -1)) rotate(45deg) scale(1.3);
+  }
 }
 
 .hero-polaroids {
@@ -523,6 +584,253 @@ a {
   line-height: 1.55;
 }
 
+.anniversary-extras {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(300px, 0.55fr);
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.capsule-card,
+.coupon-card,
+.final-surprise-card {
+  border: 1px solid rgba(122, 23, 69, 0.12);
+  border-radius: 30px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.78), rgba(255, 250, 242, 0.7)),
+    radial-gradient(circle at top right, rgba(255, 209, 102, 0.24), transparent 18rem);
+  box-shadow: 0 20px 56px rgba(122, 23, 69, 0.1);
+  backdrop-filter: blur(14px);
+}
+
+.capsule-card {
+  padding: 1.2rem;
+}
+
+.mini-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.mini-heading h3 {
+  max-width: 520px;
+  margin: 0;
+  color: var(--berry-900);
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  line-height: 1.05;
+}
+
+.capsule-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+
+.capsule-grid article {
+  min-height: 160px;
+  padding: 0.95rem;
+  border: 1px solid rgba(122, 23, 69, 0.08);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.62);
+  transition: transform 180ms ease, background 180ms ease;
+}
+
+.capsule-grid article:hover {
+  background: #fff;
+  transform: translateY(-5px);
+}
+
+.capsule-grid strong {
+  display: block;
+  color: var(--rose-500);
+  font-size: 0.96rem;
+  font-weight: 900;
+}
+
+.capsule-grid p {
+  margin: 0.7rem 0 0;
+  color: rgba(50, 17, 35, 0.72);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.coupon-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.25rem;
+}
+
+.coupon-card h3 {
+  margin: 0.7rem 0 1rem;
+  color: var(--berry-900);
+  font-size: 1.55rem;
+  line-height: 1.05;
+}
+
+.coupon-ticket {
+  position: relative;
+  min-height: 190px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.1rem;
+  border: 2px dashed rgba(225, 29, 112, 0.34);
+  border-radius: 24px;
+  background:
+    linear-gradient(135deg, rgba(255, 228, 239, 0.9), rgba(255, 250, 242, 0.92)),
+    radial-gradient(circle at 90% 10%, rgba(255, 209, 102, 0.38), transparent 10rem);
+}
+
+.coupon-ticket::before,
+.coupon-ticket::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--rose-50);
+  transform: translateY(-50%);
+}
+
+.coupon-ticket::before {
+  left: -13px;
+}
+
+.coupon-ticket::after {
+  right: -13px;
+}
+
+.coupon-ticket span {
+  color: var(--rose-500);
+  font-size: 0.82rem;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.coupon-ticket p {
+  margin: 0;
+  color: var(--berry-900);
+  font-size: 1.2rem;
+  font-weight: 900;
+  line-height: 1.35;
+}
+
+.coupon-card button,
+.final-surprise-card button {
+  min-height: 46px;
+  margin-top: 1rem;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--rose-500), #ff6fa3);
+  color: #fff;
+  cursor: pointer;
+  font-weight: 900;
+  box-shadow: 0 14px 32px rgba(225, 29, 112, 0.22);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.coupon-card button:hover,
+.final-surprise-card button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 46px rgba(225, 29, 112, 0.28);
+}
+
+.final-surprise-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 1rem;
+  padding: clamp(1.25rem, 4vw, 2rem);
+  background:
+    linear-gradient(135deg, rgba(59, 10, 36, 0.94), rgba(122, 23, 69, 0.88)),
+    radial-gradient(circle at 85% 30%, rgba(255, 209, 102, 0.34), transparent 18rem);
+  color: #fff;
+}
+
+.final-surprise-card h2 {
+  max-width: 740px;
+  margin: 0;
+  color: #fff;
+  font-size: clamp(1.9rem, 5vw, 3.5rem);
+  line-height: 1.03;
+}
+
+.final-surprise-card p:not(.eyebrow) {
+  max-width: 640px;
+  margin: 1rem 0 0;
+  color: rgba(255, 255, 255, 0.76);
+  line-height: 1.7;
+}
+
+.final-surprise-card .eyebrow {
+  color: var(--gold);
+}
+
+.final-surprise-card button {
+  min-width: 210px;
+  margin-top: 0;
+  background: #fff;
+  color: var(--berry-900);
+}
+
+.final-letter-card {
+  position: relative;
+  width: min(680px, 100%);
+  padding: clamp(1.6rem, 5vw, 2.8rem);
+  border-radius: 34px;
+  background:
+    linear-gradient(145deg, rgba(59, 10, 36, 0.96), rgba(122, 23, 69, 0.92)),
+    radial-gradient(circle at top right, rgba(255, 209, 102, 0.26), transparent 18rem);
+  box-shadow: 0 34px 100px rgba(30, 6, 20, 0.4);
+  color: #fff;
+  animation: letterIn 260ms ease;
+}
+
+.final-letter-card h2 {
+  margin: 0 0 1rem;
+  color: #fff;
+  font-size: clamp(2.3rem, 7vw, 4.2rem);
+  line-height: 0.98;
+}
+
+.final-letter-card p:not(.letter-kicker) {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 1.08rem;
+  line-height: 1.8;
+}
+
+.final-letter-card .letter-kicker {
+  color: var(--gold);
+}
+
+.signature-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.6rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.signature-line span {
+  color: #fff;
+  font-size: 1.4rem;
+  font-weight: 900;
+}
+
+.signature-line strong {
+  color: var(--gold);
+}
+
 .note-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -803,6 +1111,7 @@ a {
   .note-grid,
   .anniversary-hero,
   .anniversary-grid,
+  .anniversary-extras,
   .reasons-grid,
   .timeline,
   .promise-grid,
@@ -830,6 +1139,18 @@ a {
 
   .video-grid .feature-video {
     grid-column: span 1;
+  }
+
+  .capsule-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .final-surprise-card {
+    grid-template-columns: 1fr;
+  }
+
+  .final-surprise-card button {
+    width: 100%;
   }
 }
 
@@ -860,7 +1181,8 @@ a {
   }
 
   .primary-action,
-  .secondary-action {
+  .secondary-action,
+  .ghost-action {
     width: 100%;
   }
 
@@ -908,6 +1230,18 @@ a {
   .date-wheel-card,
   .open-when-card {
     border-radius: 22px;
+  }
+
+  .capsule-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mini-heading {
+    display: block;
+  }
+
+  .coupon-ticket {
+    min-height: 170px;
   }
 
   .forever-section {

@@ -44,6 +44,27 @@ const anniversaryPromises = [
   'Seguir soñando contigo, paso a paso.',
 ];
 
+const monthCapsule = [
+  { title: 'Mes 1', text: 'El comienzo de una historia que empezó a quedarse en mi corazón.' },
+  { title: 'Mes 2', text: 'Más confianza, más risas y más ganas de seguir conociéndote.' },
+  { title: 'Mes 3', text: 'Momentos pequeños que comenzaron a sentirse enormes.' },
+  { title: 'Mes 4', text: 'La certeza de que contigo los días tienen otro brillo.' },
+  { title: 'Mes 5', text: 'Más fotos, más recuerdos y más razones para sonreír.' },
+  { title: 'Mes 6', text: 'Medio año de elegirnos con cariño, paciencia y ternura.' },
+  { title: 'Mes 7', text: 'Aprender que amar también es cuidar los detalles.' },
+  { title: 'Mes 8', text: 'Sentir que lo nuestro se vuelve más fuerte y más bonito.' },
+  { title: 'Mes 9', text: 'Un mes más de memorias que quiero guardar siempre.' },
+  { title: 'Mes 10', text: 'Diez meses contigo, y todavía me emociona todo lo que viene.' },
+];
+
+const loveCoupons = [
+  'Vale por una cita planeada por mí.',
+  'Vale por una tarde de películas y abrazos.',
+  'Vale por una carta escrita a mano.',
+  'Vale por tu comida o postre favorito.',
+  'Vale por una salida solo para hacer recuerdos nuevos.',
+];
+
 const loveReasons = [
   'Porque tu sonrisa se siente como hogar.',
   'Porque haces inolvidables los días sencillos.',
@@ -98,8 +119,11 @@ const storyMoments = [
 
 function App() {
   const [isLetterOpen, setIsLetterOpen] = useState(false);
+  const [isFinalSurpriseOpen, setIsFinalSurpriseOpen] = useState(false);
+  const [celebrationBurst, setCelebrationBurst] = useState(0);
   const [countdown, setCountdown] = useState(getCountdown);
   const [selectedPlan, setSelectedPlan] = useState(datePlans[0]);
+  const [selectedCoupon, setSelectedCoupon] = useState(loveCoupons[0]);
   const [openNote, setOpenNote] = useState(openWhenNotes[0]);
 
   useEffect(() => {
@@ -113,6 +137,12 @@ function App() {
     setSelectedPlan(datePlans[nextIndex]);
   };
 
+  const chooseCoupon = () => {
+    const currentIndex = loveCoupons.indexOf(selectedCoupon);
+    const nextIndex = (currentIndex + 1) % loveCoupons.length;
+    setSelectedCoupon(loveCoupons[nextIndex]);
+  };
+
   return (
     <main className="App">
       <nav className="love-nav" aria-label="Navegación de recuerdos">
@@ -122,6 +152,22 @@ function App() {
         <a href="#gallery">Fotos</a>
         <a href="#videos">Videos</a>
       </nav>
+
+      {celebrationBurst > 0 && (
+        <div className="celebration-burst" key={celebrationBurst} aria-hidden="true">
+          {Array.from({ length: 28 }).map((_, index) => (
+            <span
+              key={index}
+              style={{
+                '--x': `${(index * 37) % 100}%`,
+                '--delay': `${(index % 7) * 55}ms`,
+                '--drift': `${((index % 9) - 4) * 34}px`,
+                '--rise': `${58 + index * 0.7}vh`,
+              }}
+            ></span>
+          ))}
+        </div>
+      )}
 
       <section className="hero-section" aria-label="Carta de amor para Elizabeth">
         <div className="floating-hearts" aria-hidden="true">
@@ -143,6 +189,9 @@ function App() {
             <a href="#anniversary" className="primary-action">Ver sorpresa de 10 meses</a>
             <button className="secondary-action" type="button" onClick={() => setIsLetterOpen(true)}>
               Leer tu carta
+            </button>
+            <button className="ghost-action" type="button" onClick={() => setCelebrationBurst((value) => value + 1)}>
+              Activar magia
             </button>
           </div>
         </div>
@@ -242,6 +291,48 @@ function App() {
             ))}
           </div>
         </div>
+
+        <div className="anniversary-extras">
+          <section className="capsule-card" aria-labelledby="capsule-title">
+            <div className="mini-heading">
+              <p className="eyebrow">Cápsula de meses</p>
+              <h3 id="capsule-title">10 capítulos de nuestra historia</h3>
+            </div>
+
+            <div className="capsule-grid">
+              {monthCapsule.map((month) => (
+                <article key={month.title}>
+                  <strong>{month.title}</strong>
+                  <p>{month.text}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <aside className="coupon-card" aria-labelledby="coupon-title">
+            <p className="card-label">Vale de amor</p>
+            <h3 id="coupon-title">Para usar cuando quieras</h3>
+            <div className="coupon-ticket">
+              <span>Elizabeth</span>
+              <p>{selectedCoupon}</p>
+            </div>
+            <button type="button" onClick={chooseCoupon}>Cambiar vale</button>
+          </aside>
+        </div>
+
+        <section className="final-surprise-card" aria-labelledby="final-surprise-title">
+          <div>
+            <p className="eyebrow">Sorpresa final</p>
+            <h2 id="final-surprise-title">Una última cosita antes de seguir viendo recuerdos</h2>
+            <p>
+              Preparé este botón como si fuera un pequeño cofre. No guarda oro,
+              guarda algo más bonito: una promesa para estos 10 meses.
+            </p>
+          </div>
+          <button type="button" onClick={() => setIsFinalSurpriseOpen(true)}>
+            Abrir sorpresa final
+          </button>
+        </section>
       </section>
 
       <section className="love-note-section" id="story">
@@ -350,6 +441,27 @@ function App() {
               y por hacer que mi vida tenga detalles que quiero cuidar siempre.
             </p>
             <strong>Te amo, hoy y en todos los días que vienen.</strong>
+          </div>
+        </div>
+      )}
+
+      {isFinalSurpriseOpen && (
+        <div className="letter-overlay" role="dialog" aria-modal="true" aria-labelledby="final-title">
+          <div className="final-letter-card">
+            <button className="letter-close" type="button" onClick={() => setIsFinalSurpriseOpen(false)} aria-label="Cerrar sorpresa">
+              ×
+            </button>
+            <p className="letter-kicker">Felices 10 meses</p>
+            <h2 id="final-title">Mi promesa para ti</h2>
+            <p>
+              Quiero que esta fecha no sea solo un número bonito. Quiero que sea
+              una forma de recordarte que te amo, que valoro lo nuestro y que
+              deseo seguir creando momentos que un día miremos con una sonrisa.
+            </p>
+            <div className="signature-line">
+              <span>Eduardo</span>
+              <strong>7 de agosto de 2026</strong>
+            </div>
           </div>
         </div>
       )}
