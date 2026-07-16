@@ -244,6 +244,7 @@ a {
 }
 
 .love-note-section,
+.anniversary-section,
 .reasons-section,
 .timeline-section,
 .video-section {
@@ -263,6 +264,263 @@ a {
   color: var(--berry-900);
   font-size: clamp(2rem, 5vw, 3.4rem);
   line-height: 1.05;
+}
+
+.anniversary-section {
+  position: relative;
+}
+
+.anniversary-section::before {
+  content: '';
+  position: absolute;
+  top: 1.5rem;
+  left: 50%;
+  width: min(760px, 84vw);
+  height: 760px;
+  background:
+    radial-gradient(circle, rgba(255, 209, 102, 0.24), transparent 58%),
+    radial-gradient(circle at 30% 30%, rgba(225, 29, 112, 0.16), transparent 38%);
+  pointer-events: none;
+  transform: translateX(-50%);
+  z-index: -1;
+}
+
+.anniversary-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(320px, 1.05fr);
+  gap: 1.2rem;
+  align-items: stretch;
+  min-height: 420px;
+  padding: clamp(1.3rem, 4vw, 2rem);
+  border: 1px solid rgba(122, 23, 69, 0.12);
+  border-radius: 34px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.86), rgba(255, 228, 239, 0.7)),
+    radial-gradient(circle at top right, rgba(255, 209, 102, 0.36), transparent 22rem);
+  box-shadow: 0 28px 80px rgba(122, 23, 69, 0.14);
+  overflow: hidden;
+}
+
+.anniversary-hero > div:first-child {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(1rem, 4vw, 2.4rem);
+}
+
+.anniversary-hero h2 {
+  margin: 0;
+  max-width: 560px;
+  color: var(--berry-900);
+  font-size: clamp(3.3rem, 10vw, 7.4rem);
+  line-height: 0.88;
+}
+
+.anniversary-hero p:not(.eyebrow) {
+  max-width: 580px;
+  margin: 1.2rem 0 0;
+  color: rgba(50, 17, 35, 0.74);
+  font-size: 1.08rem;
+  line-height: 1.75;
+}
+
+.countdown-panel {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  align-content: center;
+  min-height: 100%;
+}
+
+.countdown-panel > div,
+.countdown-panel > strong {
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  border-radius: 28px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.72), rgba(255, 250, 242, 0.62)),
+    radial-gradient(circle at top, rgba(255, 209, 102, 0.34), transparent 10rem);
+  box-shadow: 0 18px 48px rgba(122, 23, 69, 0.12);
+  backdrop-filter: blur(16px);
+}
+
+.countdown-panel strong {
+  color: var(--berry-900);
+  font-size: clamp(2.6rem, 7vw, 4.6rem);
+  line-height: 1;
+}
+
+.countdown-panel > strong {
+  grid-column: 1 / -1;
+  padding: 2rem;
+  text-align: center;
+}
+
+.countdown-panel span {
+  margin-top: 0.5rem;
+  color: var(--rose-500);
+  font-size: 0.85rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.anniversary-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.month-card,
+.date-wheel-card,
+.open-when-card {
+  min-height: 290px;
+  padding: 1.35rem;
+  border: 1px solid rgba(122, 23, 69, 0.12);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: 0 18px 50px rgba(122, 23, 69, 0.1);
+  backdrop-filter: blur(14px);
+}
+
+.main-memory {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background:
+    linear-gradient(160deg, rgba(59, 10, 36, 0.88), rgba(122, 23, 69, 0.8)),
+    radial-gradient(circle at 10% 10%, rgba(255, 209, 102, 0.42), transparent 16rem);
+  color: #fff;
+}
+
+.main-memory span {
+  color: rgba(255, 209, 102, 0.95);
+  font-size: clamp(5.5rem, 14vw, 9rem);
+  font-weight: 900;
+  line-height: 0.8;
+}
+
+.month-card h3,
+.date-wheel-card h3,
+.open-when-card h3 {
+  margin: 0.8rem 0 0.65rem;
+  color: var(--berry-900);
+  font-size: 1.55rem;
+}
+
+.main-memory h3 {
+  color: #fff;
+}
+
+.month-card p,
+.date-wheel-card p,
+.open-when-card p {
+  margin: 0;
+  color: rgba(50, 17, 35, 0.72);
+  line-height: 1.7;
+}
+
+.main-memory p {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.card-label {
+  color: var(--rose-500) !important;
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.date-wheel-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.date-wheel-card button,
+.note-buttons button {
+  min-height: 42px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--berry-900);
+  color: #fff;
+  cursor: pointer;
+  font-weight: 900;
+  transition: transform 180ms ease, background 180ms ease;
+}
+
+.date-wheel-card button:hover,
+.note-buttons button:hover,
+.note-buttons button.active {
+  background: var(--rose-500);
+  transform: translateY(-2px);
+}
+
+.note-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.note-buttons button {
+  padding: 0.6rem 0.8rem;
+  background: rgba(59, 10, 36, 0.88);
+  font-size: 0.82rem;
+}
+
+.promise-section {
+  margin-top: clamp(2.5rem, 7vw, 4rem);
+}
+
+.section-heading.compact {
+  margin-bottom: 1.25rem;
+}
+
+.promise-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.promise-grid article {
+  min-height: 180px;
+  padding: 1rem;
+  border: 1px solid rgba(122, 23, 69, 0.1);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 14px 36px rgba(122, 23, 69, 0.09);
+  transition: transform 180ms ease;
+}
+
+.promise-grid article:hover {
+  transform: translateY(-5px);
+}
+
+.promise-grid span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--rose-100);
+  color: var(--rose-500);
+  font-weight: 900;
+}
+
+.promise-grid p {
+  margin: 1rem 0 0;
+  color: rgba(50, 17, 35, 0.76);
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.55;
 }
 
 .note-grid {
@@ -543,10 +801,21 @@ a {
   }
 
   .note-grid,
+  .anniversary-hero,
+  .anniversary-grid,
   .reasons-grid,
   .timeline,
+  .promise-grid,
   .video-grid {
     grid-template-columns: 1fr;
+  }
+
+  .countdown-panel {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .countdown-panel > div {
+    min-height: 120px;
   }
 
   .timeline::before {
@@ -578,7 +847,7 @@ a {
     flex: 1;
     min-height: 38px;
     padding: 0.4rem 0.35rem;
-    font-size: 0.76rem;
+    font-size: 0.68rem;
   }
 
   .hero-section {
@@ -606,10 +875,39 @@ a {
   }
 
   .love-note-section,
+  .anniversary-section,
   .reasons-section,
   .timeline-section,
   .video-section {
     width: min(100% - 24px, 1180px);
+  }
+
+  .anniversary-hero {
+    min-height: auto;
+    border-radius: 24px;
+    padding: 1rem;
+  }
+
+  .anniversary-hero > div:first-child {
+    padding: 1rem 0.5rem;
+  }
+
+  .anniversary-hero h2 {
+    font-size: clamp(3.2rem, 18vw, 4.8rem);
+  }
+
+  .countdown-panel {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .countdown-panel > div {
+    min-height: 112px;
+  }
+
+  .month-card,
+  .date-wheel-card,
+  .open-when-card {
+    border-radius: 22px;
   }
 
   .forever-section {
