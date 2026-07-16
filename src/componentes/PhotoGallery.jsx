@@ -73,34 +73,70 @@ const imageList = [
 ];
 
 const PhotoGallery = () => {
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedIndex, setSelectedIndex] = useState(null);
 
-  const handleImageClick = (img) => {
-    setSelectedImage(`${process.env.PUBLIC_URL}/imagenes/${img}`);
+  const selectedImage = selectedIndex === null
+    ? null
+    : `${process.env.PUBLIC_URL}/imagenes/${imageList[selectedIndex]}`;
+
+  const showPrevious = () => {
+    setSelectedIndex((currentIndex) => (
+      currentIndex === 0 ? imageList.length - 1 : currentIndex - 1
+    ));
+  };
+
+  const showNext = () => {
+    setSelectedIndex((currentIndex) => (
+      currentIndex === imageList.length - 1 ? 0 : currentIndex + 1
+    ));
   };
 
   return (
-    <div className="gallery-section">
-      <h2>❤️‍🩹 Mi mujer ❤️‍🩹</h2>
+    <section className="gallery-section" id="gallery" aria-labelledby="gallery-title">
+      <div className="gallery-heading">
+        <p className="gallery-kicker">Jardín de recuerdos</p>
+        <h2 id="gallery-title">Elizabeth, el amor de mi vida</h2>
+        <p>
+          Una colección de pequeños momentos que se volvieron mis recuerdos favoritos.
+          Toca cualquier foto para verla más cerca.
+        </p>
+      </div>
+
+      <div className="gallery-meta" aria-label="Gallery summary">
+        <span>{imageList.length} recuerdos</span>
+        <span>Fotos</span>
+        <span>Hecho con amor</span>
+      </div>
+
       <div className="gallery">
-        {imageList.map((img, i) => (
-          <img
-            key={i}
-            src={`${process.env.PUBLIC_URL}/imagenes/${img}`}
-            alt={`foto-${i}`}
-            className="fade-in"
-            onClick={() => handleImageClick(img)}
-          />
+        {imageList.map((img, index) => (
+          <button
+            className="gallery-card fade-in"
+            key={img}
+            onClick={() => setSelectedIndex(index)}
+            style={{ animationDelay: `${Math.min(index * 0.025, 0.7)}s` }}
+            aria-label={`Abrir recuerdo ${index + 1}`}
+          >
+            <img
+              src={`${process.env.PUBLIC_URL}/imagenes/${img}`}
+              alt={`Recuerdo con Elizabeth ${index + 1}`}
+              loading="lazy"
+              decoding="async"
+            />
+          </button>
         ))}
       </div>
 
-      {/* Modal para pantalla completa */}
       <ImageModal
         src={selectedImage}
-        alt="Foto ampliada"
-        onClose={() => setSelectedImage(null)}
+        alt={selectedIndex === null ? '' : `Recuerdo con Elizabeth ${selectedIndex + 1}`}
+        count={imageList.length}
+        currentIndex={selectedIndex}
+        onClose={() => setSelectedIndex(null)}
+        onPrevious={showPrevious}
+        onNext={showNext}
       />
-    </div>
+    </section>
   );
 };
 

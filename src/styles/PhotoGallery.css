@@ -1,47 +1,105 @@
-/* =========================
-   PhotoGallery CSS - iCloud Style
-   ========================= */
-
 .gallery-section {
-  text-align: center;
-  padding: 2rem 1rem;
-  max-width: 1200px;
+  width: min(1180px, calc(100% - 32px));
   margin: 0 auto;
+  padding: clamp(3rem, 8vw, 5rem) 0;
 }
 
-.gallery-section h2 {
-  color: #880e4f;
-  margin-bottom: 2rem;
-  font-size: 2rem;
+.gallery-heading {
+  max-width: 760px;
+  margin: 0 auto 1.5rem;
+  text-align: center;
 }
 
-/* Masonry grid usando CSS columns */
+.gallery-kicker {
+  margin: 0 0 0.85rem;
+  color: var(--rose-500);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.gallery-heading h2 {
+  margin: 0;
+  color: var(--berry-900);
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  line-height: 1.05;
+}
+
+.gallery-heading p {
+  max-width: 620px;
+  margin: 1rem auto 0;
+  color: rgba(50, 17, 35, 0.72);
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+
+.gallery-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin: 0 0 2rem;
+}
+
+.gallery-meta span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 38px;
+  padding: 0.55rem 0.9rem;
+  border: 1px solid rgba(122, 23, 69, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.68);
+  color: var(--berry-700);
+  font-size: 0.9rem;
+  font-weight: 800;
+  box-shadow: 0 10px 26px rgba(122, 23, 69, 0.08);
+}
+
 .gallery {
-  column-count: 4;      /* número de columnas */
-  column-gap: 1rem;     /* espacio entre columnas */
-  padding: 0;
+  column-count: 4;
+  column-gap: 1rem;
 }
 
-.gallery img {
+.gallery-card {
+  display: block;
   width: 100%;
-  height: auto;          /* altura dinámica según la imagen */
-  margin-bottom: 1rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 0 0 1rem;
+  padding: 0;
+  border: 0;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 16px 38px rgba(122, 23, 69, 0.13);
   cursor: pointer;
+  break-inside: avoid;
+  overflow: hidden;
   opacity: 0;
-  transform: translateY(20px);
-  animation: fadeIn 0.8s ease forwards;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transform: translateY(22px);
+  animation: fadeIn 0.72s ease forwards;
+  transition: transform 220ms ease, box-shadow 220ms ease;
 }
 
-.gallery img:hover {
-  transform: scale(1.03);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  z-index: 1;
+.gallery-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 22px 56px rgba(122, 23, 69, 0.2);
 }
 
-/* Fade-in animation */
+.gallery-card:focus-visible {
+  outline: 4px solid rgba(225, 29, 112, 0.35);
+  outline-offset: 4px;
+}
+
+.gallery-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 400ms ease;
+}
+
+.gallery-card:hover img {
+  transform: scale(1.045);
+}
+
 @keyframes fadeIn {
   to {
     opacity: 1;
@@ -49,68 +107,6 @@
   }
 }
 
-/* Modal Styles */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.85);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  backdrop-filter: blur(5px);
-  padding: 1rem;
-}
-
-.modal-content {
-  max-width: 90%;
-  max-height: 90vh;
-  object-fit: contain;
-  border-radius: 8px;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-  animation: zoomIn 0.3s ease;
-}
-
-.modal-close {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background: white;
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  font-size: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: #333;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.2s;
-}
-
-.modal-close:hover {
-  background-color: #f0f0f0;
-}
-
-@keyframes zoomIn {
-  from {
-    transform: scale(0.9);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-/* =========================
-   Responsive
-   ========================= */
 @media (max-width: 1200px) {
   .gallery {
     column-count: 3;
@@ -124,6 +120,10 @@
 }
 
 @media (max-width: 600px) {
+  .gallery-section {
+    width: min(100% - 24px, 1180px);
+  }
+
   .gallery {
     column-count: 1;
   }

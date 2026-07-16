@@ -1,77 +1,171 @@
+body.modal-open {
+  overflow: hidden;
+}
+
 .modal-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(255, 182, 193, 0.85); /* rosa suave */
+  inset: 0;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background:
+    radial-gradient(circle at 50% 15%, rgba(255, 209, 102, 0.32), transparent 24rem),
+    rgba(30, 6, 20, 0.88);
+  backdrop-filter: blur(18px);
+  animation: modalFadeIn 220ms ease;
   z-index: 1000;
-  animation: fadeIn 0.4s ease-in-out;
-  padding: 20px;
-  overflow: auto;
 }
 
-.modal-content {
+.modal-shell {
   position: relative;
-  max-width: 90%;
-  max-height: 90vh; /* limita la altura máxima al 90% del viewport */
+  display: grid;
+  place-items: center;
+  width: min(100%, 1040px);
+  max-height: 92vh;
+}
+
+.modal-topbar {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  right: 1rem;
+  z-index: 2;
   display: flex;
-  justify-content: center;
   align-items: center;
-  text-align: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+  backdrop-filter: blur(16px);
 }
 
-.modal-content img {
+.modal-topbar p,
+.modal-topbar span {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.modal-image {
+  display: block;
   max-width: 100%;
-  max-height: 90vh; /* evita distorsión */
-  width: auto;       /* mantiene proporción */
-  height: auto;      /* mantiene proporción */
-  border-radius: 12px;
-  box-shadow: 0 0 25px rgba(255, 105, 180, 0.6);
-  transition: transform 0.3s ease;
+  max-height: 92vh;
+  object-fit: contain;
+  border: 10px solid rgba(255, 255, 255, 0.92);
+  border-radius: 24px;
+  box-shadow: 0 30px 100px rgba(0, 0, 0, 0.42);
+  animation: modalZoomIn 260ms ease;
 }
 
-.modal-content img:hover {
-  transform: scale(1.02);
+.close-button,
+.modal-nav {
+  position: absolute;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.26);
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+  cursor: pointer;
+  backdrop-filter: blur(16px);
+  transition: transform 180ms ease, background 180ms ease;
 }
 
 .close-button {
-  position: absolute;
-  top: -10px;
-  right: -10px;
-  background-color: #fff0f5;
-  color: #d63384;
-  border: none;
-  border-radius: 20px;
-  padding: 8px 12px;
-  font-size: 16px;
-  cursor: pointer;
-  box-shadow: 0 0 10px rgba(255, 105, 180, 0.4);
-  transition: background-color 0.3s ease;
-  z-index: 1001;
+  top: -0.35rem;
+  right: -0.35rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  font-size: 2rem;
+  line-height: 1;
 }
 
-.close-button:hover {
-  background-color: #ffe4e1;
+.modal-nav {
+  top: 50%;
+  width: 48px;
+  height: 72px;
+  border-radius: 999px;
+  font-size: 3rem;
+  transform: translateY(-50%);
 }
 
-@keyframes fadeIn {
+.modal-nav.previous {
+  left: -0.6rem;
+}
+
+.modal-nav.next {
+  right: -0.6rem;
+}
+
+.close-button:hover,
+.modal-nav:hover {
+  background: rgba(225, 29, 112, 0.62);
+  transform: scale(1.04);
+}
+
+.modal-nav:hover {
+  transform: translateY(-50%) scale(1.04);
+}
+
+@keyframes modalFadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
 }
 
-/* Responsive adjustments */
-@media (max-width: 600px) {
-  .modal-content img {
-    max-width: 100%;
-    max-height: 80vh;
+@keyframes modalZoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 700px) {
+  .modal-overlay {
+    padding: 0.75rem;
+  }
+
+  .modal-image {
+    border-width: 6px;
+    border-radius: 18px;
+  }
+
+  .modal-topbar {
+    top: auto;
+    bottom: 0.85rem;
+    border-radius: 18px;
+  }
+
+  .modal-topbar p {
+    max-width: 68%;
+    font-size: 0.78rem;
+  }
+
+  .modal-nav {
+    width: 42px;
+    height: 60px;
+    font-size: 2.5rem;
+  }
+
+  .modal-nav.previous {
+    left: 0.2rem;
+  }
+
+  .modal-nav.next {
+    right: 0.2rem;
   }
 
   .close-button {
-    font-size: 14px;
-    padding: 6px 10px;
+    top: 0.35rem;
+    right: 0.35rem;
   }
 }

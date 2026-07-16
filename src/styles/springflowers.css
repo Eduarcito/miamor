@@ -1,87 +1,201 @@
-/* Fondo suave y centrado */
 .spring-section {
-  text-align: center;
-  padding: 20px;
-  background-color: #ffe4ec;
-  color: #880e4f;
-  height: 500px;
   position: relative;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
+  width: min(1180px, calc(100% - 32px));
+  min-height: 560px;
+  margin: 0 auto;
+  padding: clamp(2rem, 6vw, 4rem);
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(320px, 1.15fr);
   align-items: center;
-  justify-content: center;
+  gap: 2rem;
+  border: 1px solid rgba(122, 23, 69, 0.12);
+  border-radius: 34px;
+  background:
+    radial-gradient(circle at 80% 20%, rgba(255, 209, 102, 0.48), transparent 22rem),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.74), rgba(255, 228, 239, 0.78));
+  box-shadow: 0 24px 70px rgba(122, 23, 69, 0.12);
+  overflow: hidden;
 }
 
-/* Contenedor del ramo */
+.spring-copy {
+  position: relative;
+  z-index: 2;
+  text-align: left;
+}
+
+.spring-kicker {
+  margin: 0 0 0.85rem;
+  color: var(--rose-500);
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.spring-copy h2 {
+  margin: 0;
+  color: var(--berry-900);
+  font-size: clamp(2.1rem, 5vw, 4rem);
+  line-height: 1.02;
+}
+
+.spring-copy p:last-child {
+  max-width: 420px;
+  margin: 1rem 0 0;
+  color: rgba(50, 17, 35, 0.72);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
 .bouquet {
   position: relative;
-  width: 300px;
-  height: 300px;
+  min-height: 420px;
 }
 
-/* Flor individual */
 .flower {
   position: absolute;
-  width: 100px;
-  height: 200px;
-  opacity: 1;
+  width: 118px;
+  height: 230px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  transform-origin: bottom center;
+  animation: flowerSway 4.5s ease-in-out infinite;
 }
 
-/* Pétalos azules redondeados */
+.flower:focus-visible {
+  outline: 4px solid rgba(225, 29, 112, 0.35);
+  outline-offset: 10px;
+  border-radius: 999px;
+}
+
 .petal {
   position: absolute;
-  width: 40px;
-  height: 40px;
-  background-color: #ffeb3b; /* azul claro */
-  border-radius: 50%;
-box-shadow: 0 0 10px rgba(255, 235, 59, 0.5); /* brillo suave */
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(145deg, #ffec70, #f9bd2b);
+  border-radius: 60% 60% 50% 50%;
+  box-shadow: 0 8px 18px rgba(249, 189, 43, 0.35);
+  transition: transform 260ms ease, filter 260ms ease;
 }
 
-.petal1 { top: 0; left: 30px; }
-.petal2 { top: 30px; left: 0px; }
-.petal3 { top: 30px; left: 60px; }
-.petal4 { top: 60px; left: 30px; }
+.petal1 { top: 0; left: 35px; }
+.petal2 { top: 32px; left: 3px; transform: rotate(-34deg); }
+.petal3 { top: 32px; left: 67px; transform: rotate(34deg); }
+.petal4 { top: 66px; left: 18px; transform: rotate(-12deg); }
+.petal5 { top: 66px; left: 52px; transform: rotate(12deg); }
 
-/* Centro amarillo brillante */
 .center {
   position: absolute;
-  top: 30px;
-  left: 30px;
+  top: 38px;
+  left: 39px;
   width: 40px;
   height: 40px;
-  background-color: #6d4c41;
+  background: radial-gradient(circle, #7b4a1f 20%, #4d2d15 72%);
   border-radius: 50%;
-box-shadow: 0 0 10px rgba(109, 76, 65, 0.4); /* sombra suave */
+  box-shadow: inset 0 0 0 6px rgba(255, 255, 255, 0.08);
+  z-index: 2;
 }
 
-/* Tallo verde */
 .stem {
   position: absolute;
-  top: 100px;
-  left: 48px;
-  width: 4px;
-  height: 100px;
-  background-color: #4caf50;
+  top: 104px;
+  left: 57px;
+  width: 6px;
+  height: 126px;
+  background: linear-gradient(#4caf50, #24713d);
+  border-radius: 999px;
 }
 
-/* Hojas pequeñas y simétricas */
 .leaf {
   position: absolute;
-  width: 20px;
-  height: 10px;
-  background-color: #81c784;
-  border-radius: 50%;
+  width: 34px;
+  height: 17px;
+  background: linear-gradient(145deg, #9be07c, #3f9f56);
+  border-radius: 100% 0 100% 0;
 }
 
 .leaf-left {
-  top: 140px;
-  left: 30px;
-  transform: rotate(-30deg);
+  top: 154px;
+  left: 24px;
+  transform: rotate(-28deg);
 }
 
 .leaf-right {
-  top: 140px;
-  left: 60px;
-  transform: rotate(30deg);
+  top: 172px;
+  left: 62px;
+  transform: rotate(22deg) scaleX(-1);
+}
+
+.flower:hover .petal,
+.flower.bloomed .petal {
+  filter: saturate(1.2) brightness(1.06);
+}
+
+.flower:hover .petal1,
+.flower.bloomed .petal1 {
+  transform: translateY(-8px) scale(1.08);
+}
+
+.flower:hover .petal2,
+.flower.bloomed .petal2 {
+  transform: translate(-8px, -2px) rotate(-42deg) scale(1.06);
+}
+
+.flower:hover .petal3,
+.flower.bloomed .petal3 {
+  transform: translate(8px, -2px) rotate(42deg) scale(1.06);
+}
+
+.flower:hover .petal4,
+.flower.bloomed .petal4 {
+  transform: translate(-6px, 7px) rotate(-18deg) scale(1.06);
+}
+
+.flower:hover .petal5,
+.flower.bloomed .petal5 {
+  transform: translate(6px, 7px) rotate(18deg) scale(1.06);
+}
+
+@keyframes flowerSway {
+  0%, 100% {
+    transform: rotate(-1.5deg);
+  }
+  50% {
+    transform: rotate(2deg);
+  }
+}
+
+@media (max-width: 900px) {
+  .spring-section {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .spring-copy {
+    text-align: center;
+  }
+
+  .spring-copy p:last-child {
+    margin-inline: auto;
+  }
+
+  .bouquet {
+    min-height: 420px;
+  }
+}
+
+@media (max-width: 600px) {
+  .spring-section {
+    width: min(100% - 24px, 1180px);
+    border-radius: 24px;
+    padding: 2rem 1rem;
+  }
+
+  .bouquet {
+    min-height: 360px;
+    transform: scale(0.82);
+    transform-origin: top center;
+  }
 }
